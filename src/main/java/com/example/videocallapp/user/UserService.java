@@ -38,4 +38,8 @@ public class UserService {
         .orElseThrow(() -> new RuntimeException("User not found!"));
     USERS_LIST.get(userIndex).setStatus(UserStatus.OFFLINE);
   }
+
+  public List<User> findAllUsers() {
+    return USERS_LIST;
+  }
 }
