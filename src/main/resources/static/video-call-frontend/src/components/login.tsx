@@ -1,37 +1,35 @@
-import { useState } from 'react'
+import '../styles/login.css'
 
 export const Login: React.FC = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault()
-    console.log(email)
-    console.log(password)
-    const fields = Object.fromEntries(new FormData(e.currentTarget))
-    console.log(fields)
-  }
-
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const data = e.target.value
-    setEmail(data)
-  }
-
-  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const data = e.target.value
-    setPassword(data)
-  }
-
   return (
-    <>
-      <h3>Login</h3>
-      <form className='form' onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <input placeholder="email" onChange={handleChangeEmail}/>
-        <label>Password:</label>
-        <input placeholder="password" type='password' onChange={handleChangePassword}/>
-        <button type='submit'>sing up</button>
-      </form>
-    </>
+    <div className='container'>
+      <div className='box'>
+        <div className='box-login' id='login'>
+          <div className='header'>
+            <h2>Hello, Again!</h2>
+            <small>We are happy to have you back!</small>
+          </div>
+          <form className='form'>
+            <div className="input-field">
+              <label htmlFor="email">Email:</label>
+              <input className='input-box' id="email" type="email" name="email" />
+            </div>
+            <div className="input-field">
+              <label htmlFor="pass">Password:</label>
+              <input className='input-box' id="pass" type="password" name="password" />
+              <i className='bx bxs-low-vision'></i>
+            </div>
+            <div className="remember">
+              <input className='check' type="checkbox" name="remember" id="rem" />
+              <label htmlFor="rem">Remember me</label>
+            </div>
+            <button className='login-btn' type="submit">Sign in</button>
+            <div className='forgot'>
+              <a href="#">Forgot Password?</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   )
 }
