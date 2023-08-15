@@ -19,6 +19,8 @@ export const Login: React.FC = () => {
     e.preventDefault()
     console.log('Email: ', email)
     console.log('Password', password)
+    setEmail('')
+    setPassword('')
   }
 
   return (
@@ -32,15 +34,31 @@ export const Login: React.FC = () => {
           <form className='form' onSubmit={onSubmit}>
             <div className="input-field">
               <label htmlFor="email">Email:</label>
-              <input className='input-box' id="email" type="email" name="email" onChange={emailHandleChange} />
+              <input
+                className='input-box'
+                id="email"
+                type="email"
+                name="email"
+                onChange={emailHandleChange}
+                value={email} />
             </div>
             <div className="input-field">
               <label htmlFor="pass">Password:</label>
-              <input className='input-box' id="pass" type="password" name="password" onChange={passwordHandleChange} />
+              <input
+                className='input-box'
+                id="pass"
+                type="password"
+                name="password"
+                onChange={passwordHandleChange}
+                value={password} />
               <i className='bx bxs-low-vision'></i>
             </div>
             <div className="remember">
-              <input className='check' type="checkbox" name="remember" id="rem" />
+              <input
+                className='check'
+                id="rem"
+                type="checkbox"
+                name="remember" />
               <label htmlFor="rem">Remember me</label>
             </div>
             <button className='login-btn' type="submit">Sign in</button>
