@@ -1,8 +1,7 @@
 import './App.css'
 import { Login } from './components/login'
 
-function App() {
-
+function App (): JSX.Element {
   return (
     <>
       <h2>Welcome to Video call!!</h2>
