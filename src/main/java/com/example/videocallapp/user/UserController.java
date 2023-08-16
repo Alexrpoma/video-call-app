@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("*")
 @RequestMapping("/api/v1/user")
 public class UserController {
   private final UserService userService;
