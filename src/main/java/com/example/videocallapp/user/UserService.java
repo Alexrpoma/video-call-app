@@ -1,5 +1,6 @@
 package com.example.videocallapp.user;
 
+import com.example.videocallapp.exceptions.DuplicateResourceException;
 import com.example.videocallapp.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class UserService {
 
   public void register(User user) {
     if(USERS_LIST.contains(user)) {
-      throw new RuntimeException("Email user is taken!");
+      throw new DuplicateResourceException("User's email has been taken!");
     }
     user.setStatus(UserStatus.ONLINE);
     USERS_LIST.add(user);
@@ -39,7 +40,7 @@ public class UserService {
     int userIndex = IntStream.range(0, USERS_LIST.size())
         .filter(i -> USERS_LIST.get(i).getEmail().equals(email))
         .findFirst()
-        .orElseThrow(() -> new RuntimeException("User not found!"));
+        .orElseThrow(() -> new ResourceNotFoundException("User not found!"));
     USERS_LIST.get(userIndex).setStatus(UserStatus.OFFLINE);
   }
 

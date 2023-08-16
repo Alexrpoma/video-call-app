@@ -26,6 +26,20 @@ public class ApiExceptionHandler {
     return ResponseEntity.badRequest().body(apiError);
   }
 
+  @ExceptionHandler(DuplicateResourceException.class)
+  public ResponseEntity<ApiError> handleError(
+      DuplicateResourceException resourceException,
+      HttpServletRequest request
+  ) {
+    ApiError apiError = ApiError.builder()
+        .path(request.getRequestURI())
+        .message(resourceException.getMessage())
+        .statusCode(HttpStatus.CONTINUE.value())
+        .localDateTime(getTime())
+        .build();
+    return ResponseEntity.status(HttpStatus.CONFLICT).body(apiError);
+  }
+
   private String getTime() {
     return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
   }
