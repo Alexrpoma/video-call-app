@@ -1,5 +1,6 @@
 package com.example.videocallapp.user;
 
+import com.example.videocallapp.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +26,10 @@ public class UserService {
     int userIndex = IntStream.range(0, USERS_LIST.size())
         .filter(i -> USERS_LIST.get(i).getEmail().equals(user.getEmail()))
         .findFirst()
-        .orElseThrow(() -> new RuntimeException("User not found!"));
+        .orElseThrow(() -> new ResourceNotFoundException("Email or password incorrect!"));
     User userFound = USERS_LIST.get(userIndex);
     if(!userFound.getPassword().equals(user.getPassword())) {
-      throw new RuntimeException("Password incorrect");
+      throw new ResourceNotFoundException("Email or password incorrect!");
     }
     userFound.setStatus(UserStatus.ONLINE);
     return userDTOMapper.apply(userFound);
