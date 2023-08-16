@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import '../styles/login.css'
+import { login } from '../services/apiConnection'
 
 export const Login: React.FC = () => {
   const [email, setEmail] = useState('')
@@ -17,18 +18,7 @@ export const Login: React.FC = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLElement>): void => {
     e.preventDefault()
-    console.log('Email: ', email)
-    console.log('Password', password)
-    fetch('http://localhost:8080/api/v1/user/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    })
+    login({ email, password })
     setEmail('')
     setPassword('')
   }
