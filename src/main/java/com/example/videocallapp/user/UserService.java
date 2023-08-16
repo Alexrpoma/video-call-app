@@ -1,5 +1,6 @@
 package com.example.videocallapp.user;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -7,8 +8,10 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
   private static final List<User> USERS_LIST = new ArrayList<>();
+  private final UserDTOMapper userDTOMapper;
 
   public void register(User user) {
     if(USERS_LIST.contains(user)) {
@@ -18,7 +21,7 @@ public class UserService {
     USERS_LIST.add(user);
   }
 
-  public User login(User user) {
+  public UserDTO login(User user) {
     int userIndex = IntStream.range(0, USERS_LIST.size())
         .filter(i -> USERS_LIST.get(i).getEmail().equals(user.getEmail()))
         .findFirst()
@@ -28,7 +31,7 @@ public class UserService {
       throw new RuntimeException("Password incorrect");
     }
     userFound.setStatus(UserStatus.ONLINE);
-    return userFound;
+    return userDTOMapper.apply(userFound);
   }
 
   public void logout(String email) {
